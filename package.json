@@ -1,0 +1,207 @@
+{
+  "name": "auto-course-player",
+  "version": "3.0.0",
+  "description": "智能自动化课程播放器 - 基于视觉识别和机器学习的自动化学习工具",
+  "main": "src/main/index.js",
+  "author": {
+    "name": "Auto Course Player Team",
+    "email": "team@autocourse.com",
+    "url": "https://github.com/auto-course-player"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/joky1987/auto_course_player_v3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joky1987/auto_course_player_v3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joky1987/auto_course_player_v3/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "start": "electron src/main/index.js",
+    "dev": "node scripts/dev.js",
+    "build": "node scripts/build.js",
+    "build:win": "node scripts/build.js --platform win32",
+    "build:mac": "node scripts/build.js --platform darwin",
+    "build:linux": "node scripts/build.js --platform linux",
+    "build:all": "npm run build:win && npm run build:mac && npm run build:linux",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/ --ext .js",
+    "lint:fix": "eslint src/ --ext .js --fix",
+    "format": "prettier --write src/**/*.{js,json,css,html}",
+    "clean": "rimraf dist temp logs/*.log",
+    "postinstall": "electron-builder install-app-deps",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux",
+    "release": "npm run build && npm run dist",
+    "docs": "jsdoc -c jsdoc.conf.json",
+    "precommit": "npm run lint && npm run test",
+    "quality-check": "node scripts/quality-check.js",
+    "start:improved": "node start-improved.js",
+    "security-audit": "npm audit && npm audit fix",
+    "update-deps": "npm update && npm audit fix"
+  },
+  "keywords": [
+    "automation",
+    "course",
+    "player",
+    "vision",
+    "machine-learning",
+    "electron",
+    "education",
+    "ai",
+    "ocr",
+    "computer-vision"
+  ],
+  "dependencies": {
+    "@electron/remote": "^2.0.12",
+    "@u4/opencv4nodejs": "^6.4.0",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "cnpm": "^9.4.0",
+    "dayjs": "^1.11.10",
+    "electron-context-menu": "^3.6.1",
+    "electron-log": "^4.4.8",
+    "electron-store": "^8.1.0",
+    "electron-updater": "^6.1.4",
+    "electron-window-state": "^5.0.3",
+    "ffi-napi": "^4.0.3",
+    "jimp": "^0.16.13",
+    "lodash": "^4.17.21",
+    "lowdb": "^6.1.0",
+    "node-addon-api": "^7.0.0",
+    "node-cron": "^3.0.2",
+    "node-machine-id": "^1.1.12",
+    "node-notifier": "^10.0.1",
+    "playwright": "^1.40.0",
+    "puppeteer": "^21.5.0",
+    "ref-napi": "^3.0.3",
+    "ref-struct-napi": "^1.1.1",
+    "robotjs": "^0.6.0",
+    "screenshot-desktop": "^1.15.1",
+    "sharp": "^0.32.6",
+    "sqlite3": "^5.1.6",
+    "systeminformation": "^5.21.20",
+    "tesseract.js": "^4.1.1",
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "^4.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "archiver": "^6.0.1",
+    "chalk": "^4.1.2",
+    "chokidar": "^3.5.3",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^36.5.0",
+    "electron-builder": "^24.6.4",
+    "electron-devtools-installer": "^3.2.0",
+    "electron-rebuild": "^3.2.9",
+    "eslint": "^8.53.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "http-server": "^14.1.1",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "jsdoc": "^4.0.2",
+    "lint-staged": "^15.0.2",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
+    "rimraf": "^5.0.5",
+    "spectron": "^19.0.0",
+    "wait-on": "^7.2.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.3"
+  },
+  "build": {
+    "appId": "com.autocourse.player",
+    "productName": "Auto Course Player",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "models/**/*",
+      "templates/**/*",
+      "config/**/*",
+      "node_modules/**/*"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/main/index.js",
+      "!**/node_modules/**"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "html"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard"
+    ],
+    "env": {
+      "node": true,
+      "browser": true,
+      "es2021": true
+    },
+    "rules": {
+      "no-console": "warn",
+      "no-debugger": "warn",
+      "semi": [
+        "error",
+        "always"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "indent": [
+        "error",
+        2
+      ]
+    }
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "printWidth": 100
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,html}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  }
+}
